@@ -11,10 +11,15 @@
     </div>
   <% end %>
 
-  <div class="max-w-xl m-auto text-4xl">
-    <div class="field input-group">
+  <div class="max-w-xl mt-4">
+    <div class="field input-group max-w-md">
       <%= form.label :caption, class: "label"%>
       <%= form.text_field :caption, class: "input"%>
+    </div>
+
+    <div class="field input-group">
+      <%= form.label :images, class: "label"%>
+      <%= form.file_field :images, class: "file", multiple: true %>
     </div>
 
     <div class="actions">
