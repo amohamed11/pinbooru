@@ -11,17 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :caption %>
-    <%= form.text_field :caption %>
-  </div>
+  <div class="max-w-xl m-auto text-4xl">
+    <div class="field input-group">
+      <%= form.label :caption, class: "label"%>
+      <%= form.text_field :caption, class: "input"%>
+    </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="actions">
+      <%= form.submit class: "btn btn-green" %>
+      <%= link_to 'Cancel', posts_path, class: "ml-4 btn btn-red" %>
+    </div>
   </div>
 <% end %>
