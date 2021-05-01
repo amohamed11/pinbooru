@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  caption: MyString
+  caption: Multiple images post
   user: one
 
 two:
-  caption: MyString
+  caption: Single image post
   user: two
