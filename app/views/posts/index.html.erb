@@ -1,29 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<div class="page-header">
+  <%= link_to 'New', new_post_path, class: "float-right btn btn-green" %>
+  <h1 class="text-xl font-bold mb-4">Recent Posts</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Caption</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.caption %></td>
-        <td><%= post.user_id %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="grid grid-cols-3 gaps-4">
+  <% @posts.each do |post| %>
+    <div class="w-min">
+      <%= post.caption %>
+      <%= link_to post do %>
+        <%= image_tag post&.images[0].variant(resize_to_limit: [360, 360])%>
+      <% end %>
+      <%# <div class="button-group mt-4"> %>
+      <%#   <%= link_to 'Edit', edit_post_path(post), class: "btn btn-yellow" %1> %>
+      <%#   <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-4 btn btn-red" %1> %>
+      <%# </div> %>
+    </div>
+  <% end %>
+</div>
 
 <br>
-
-<%= link_to 'New Post', new_post_path, class: "btn btn-blue" %>

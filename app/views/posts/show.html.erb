@@ -10,7 +10,7 @@
     <br/>
     <%= @post.caption %>
   </p>
-</div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-blue" %>
+  <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-4 btn btn-red" %>
+</div>
