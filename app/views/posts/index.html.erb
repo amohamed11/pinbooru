@@ -5,17 +5,17 @@
   <h1 class="text-xl font-bold mb-4">Recent Posts</h1>
 </div>
 
-<div class="grid grid-cols-3 gaps-4">
+<div class="grid grid-cols-4 gaps-4">
   <% @posts.each do |post| %>
-    <div class="w-min">
-      <%= post.caption %>
+    <div>
+      <p>
+        <strong><%= post.caption %></strong>
+        <br/>
+        @<%= @post_authors[post.user_id] %>
+      </p>
       <%= link_to post do %>
-        <%= image_tag post&.images[0].variant(resize_to_limit: [360, 360])%>
+        <%= image_tag post&.images[0].variant(resize_to_fit: [340, 340]), class: "hover:shadow-2xl hover:scale-110"%>
       <% end %>
-      <%# <div class="button-group mt-4"> %>
-      <%#   <%= link_to 'Edit', edit_post_path(post), class: "btn btn-yellow" %1> %>
-      <%#   <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-4 btn btn-red" %1> %>
-      <%# </div> %>
     </div>
   <% end %>
 </div>

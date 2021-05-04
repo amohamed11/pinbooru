@@ -11,15 +11,23 @@
     </div>
   <% end %>
 
-  <div class="max-w-xl mt-4">
+  <div class="mt-4">
     <div class="field input-group max-w-md">
       <%= form.label :caption, class: "label"%>
       <%= form.text_field :caption, class: "input"%>
     </div>
 
-    <div class="field input-group">
-      <%= form.label :images, class: "label"%>
-      <%= form.file_field :images, class: "file", multiple: true %>
+    <div data-controller="multi-upload">
+      <div class="images field input-group">
+        <%= form.label :images, class: "label"%>
+        <div id="preview" class="grid grid-cols-6 gaps-2">
+          <%= form.object.images.each do |image| %>
+            <%= image_tag image.variant(resize_to_fill: ([200, 200])) %>
+          <% end %>
+        </div>
+        <%= form.file_field :images, multiple: true, :data => { :action => "multi-upload#addFile" } %>
+      </div>
+      <div data-multi-upload-target="files"></div>
     </div>
 
     <div class="actions">

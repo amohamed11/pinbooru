@@ -5,10 +5,13 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    @post_authors = @posts.map { |p| p.user_id = (User.find_by id: p.user_id).name }
+    puts @post_authors
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post_author = User.find_by id: @post.user_id
   end
 
   # GET /posts/new
@@ -39,7 +42,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params) and @post.user_id == current_user.id
         format.html { redirect_to @post, notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -51,10 +54,12 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    if @post.user_id == current_user.id
+      @post.destroy
+      respond_to do |format|
+        format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 

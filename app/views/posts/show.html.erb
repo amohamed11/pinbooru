@@ -1,16 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<div class="post-detail">
-  <% @post.images.each do |image| %>
-    <%= image_tag image %>
+<div class="post-detail mb-8">
+  <% if current_user.present? && @post.user_id == current_user.id %>
+    <div class="float-right">
+      <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-blue mr-4" %>
+      <%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-red" %>
+    </div>
   <% end %>
 
-  <p>
-    <strong>@<%= @post.user_id %></strong>
+  <h1 class="text-xl font-bold"><%= @post.caption %></h1>
+  <p class="mb-4">
+    @<%= @post_author.name %>
     <br/>
-    <%= @post.caption %>
   </p>
 
-  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-blue" %>
-  <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-4 btn btn-red" %>
+  <div class="grid grid-cols-3 gaps-4">
+    <% @post.images.each do |image| %>
+      <%= image_tag image.variant(resize_to_fill: [400, 400]) %>
+    <% end %>
+  </div>
 </div>

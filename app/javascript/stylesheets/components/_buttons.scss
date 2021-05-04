@@ -6,6 +6,8 @@
   padding: 0.35rem 0.75rem;
   transition: 0.15s ease;
 
+  @apply rounded-full;
+
   &.btn-sm {
     @apply text-sm py-px px-2;
   }
