@@ -20,7 +20,7 @@
     <div data-controller="multi-upload">
       <div class="images field input-group">
         <%= form.label :images, class: "label"%>
-        <div id="preview" class="grid grid-cols-6 gap-4">
+        <div id="preview" class="grid grid-cols-3 gap-2 lg:grid-cols-6 lg:gap-2">
           <% form.object.images.each do |image| %>
             <div class="w-max relative">
               <%= image_tag image.variant(resize_to_fill: [200, 200], quality: 50), class: "rounded-2xl" %>
@@ -36,7 +36,7 @@
             </div>
           <% end %>
         </div>
-        <%= form.file_field :images, class: "mt-6",
+        <%= form.file_field :images, class: "w-min input mt-4",
           multiple: true,
           accept: "image/png,image/jpeg",
           :data => { :action => "multi-upload#addFile" }
@@ -54,7 +54,7 @@
       %>
     </div>
 
-    <div class="actions">
+    <div class="actions mt-4">
       <%= form.submit class: "btn btn-green" %>
       <%= link_to 'Cancel', posts_path, class: "ml-4 btn btn-red" %>
     </div>

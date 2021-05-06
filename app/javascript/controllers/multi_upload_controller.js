@@ -1,33 +1,53 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
+  // filesTarget is going to contain the list of input elements we've added
+  // files to - in other words, these are the input elements that we're going
+  // to submit.
+  static targets = ["files"]
 
+  // Modified from: https://mentalized.net/journal/2020/11/30/upload-multiple-files-with-rails/
   addFile(event) {
-    // Modified from: https://mentalized.net/journal/2020/11/30/upload-multiple-files-with-rails/
-    // Create preveiw
     const previewList = document.getElementById("preview")
-    const preview = document.getElementById("preview-template").cloneNode(true)
-    const previewImg = preview.firstElementChild
 
     // Grab some references for later
     const originalInput = event.target
+    const originalParent = originalInput.parentNode
+
+    // Move the input element that we've added files to, to the list of
+    // selected elements
+    this.filesTarget.append(originalInput)
 
     // Read the image file for preview
-    var imgFile = originalInput.files[originalInput.files.length - 1]
-    var reader = new FileReader()
-    reader.onload = function(e) {
-      previewImg.src = e.target.result
-    };
-    reader.readAsDataURL(imgFile)
+    for (let imgFile of originalInput.files) {
+      const preview = document.getElementById("preview-template").cloneNode(true)
+      const previewImg = preview.firstElementChild
+      var reader = new FileReader()
+      reader.onload = function(e) {
+        previewImg.src = e.target.result
+      };
+      reader.readAsDataURL(imgFile)
 
-    previewImg.style.objectFit = "cover"
-    previewImg.style.width = "200px"
-    previewImg.style.height = "200px"
+      previewImg.style.objectFit = "cover"
+      previewImg.style.width = "200px"
+      previewImg.style.height = "200px"
 
-    // Append preview to preview list
-    preview.style.display = "block"
-    preview.removeAttribute("id")
-    previewList.append(preview)
+      // Append preview to preview list
+      preview.style.display = "block"
+      preview.removeAttribute("id")
+      previewList.append(preview)
+    }
+
+    // // Create a new blank, input field to use going forward
+    // const newInput = originalInput.cloneNode()
+
+    // // Clear the filelist - some browsers maintain the filelist when cloning,
+    // // others don't
+    // newInput.value = ""
+
+    // // Add it to the DOM where the original input was
+    // originalParent.removeChild(originalInput)
+    // originalParent.append(newInput)
   }
 
   removeFile(event) {

@@ -64,7 +64,7 @@ class PostsController < ApplicationController
 
   def delete_image
     @image = ActiveStorage::Attachment.find(params[:id])
-    @image.purge
+    @image.purge_later
   end
 
 
