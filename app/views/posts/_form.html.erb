@@ -20,12 +20,19 @@
     <div data-controller="multi-upload">
       <div class="images field input-group">
         <%= form.label :images, class: "label"%>
-        <div id="preview" class="grid grid-cols-6 gaps-2">
-          <%= form.object.images.each do |image| %>
-            <%= image_tag image.variant(resize_to_fill: ([200, 200], quality: 50)) %>
+        <div id="preview" class="grid grid-cols-4 gaps-2 mb-4">
+          <div id="preview-template" class="w-max relative hidden" style="">
+            <img src="" class="rounded-2xl" />
+            <%= button_tag "❌", type: "button", class: "btn btn-sm btn-transparent absolute top-1 right-0 ", :data => { :action => "multi-upload#removeFile" }%>
+          </div>
+          <% form.object.images.each do |image| %>
+            <div class="w-max relative">
+              <%= image_tag image.variant(resize_to_fill: [200, 200], quality: 50), class: "rounded-2xl" %>
+              <%= link_to "❌", delete_image_post_url(image.id), class: "btn btn-sm btn-transparent absolute top-1 right-0", method: :delete, :data => { confirm: "Are you sure?", :action => "multi-upload#removeFile" }  %>
+            </div>
           <% end %>
         </div>
-        <%= form.file_field :images, multiple: true, :data => { :action => "multi-upload#addFile" } %>
+        <%= form.file_field :images, multiple: true, accept: "image/png,image/jpeg", :data => { :action => "multi-upload#addFile" } %>
       </div>
       <div data-multi-upload-target="files"></div>
     </div>

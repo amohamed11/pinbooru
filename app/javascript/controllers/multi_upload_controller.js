@@ -10,27 +10,34 @@ export default class extends Controller {
 
   addFile(event) {
     // Create preveiw
-    const preview = document.createElement("img")
     const previewList = document.getElementById("preview")
+    const preview = document.getElementById("preview-template").cloneNode(true)
+    const previewImg = preview.firstElementChild
 
     // Grab some references for later
     const originalInput = event.target
     const originalParent = originalInput.parentNode
 
+    this.filesTarget.append(originalInput)
+
     // Read the image file for preview
     var imgFile = originalInput.files[originalInput.files.length - 1]
     var reader = new FileReader()
     reader.onload = function(e) {
-      preview.src = e.target.result
+      previewImg.src = e.target.result
     };
     reader.readAsDataURL(imgFile)
 
-    preview.style.objectFit = "cover"
-    preview.style.width = "200px"
-    preview.style.height = "200px"
+    console.log(this.filesTarget)
+
+    previewImg.style.objectFit = "cover"
+    previewImg.style.width = "200px"
+    previewImg.style.height = "200px"
+
+    preview.style.display = "block"
 
     // Append preview to preview list
-    previewList.prepend(preview)
+    previewList.append(preview)
   }
 }
 

@@ -62,6 +62,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_to posts_url
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
