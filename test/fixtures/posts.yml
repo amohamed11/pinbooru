@@ -2,8 +2,8 @@
 
 one:
   caption: Multiple images post
-  user: one
+  user_id: 1
 
 two:
   caption: Single image post
-  user: two
+  user_id: 1

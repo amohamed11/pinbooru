@@ -7,7 +7,17 @@
 one:
   id: 1
   email: one@test.com
+  first_name: one
+  last_name: test
+  encrypted_password: <%= User.new.send(:password_digest, '123greetings') %>
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
 
 two:
   id: 2
   email: two@test.com
+  first_name: two
+  last_name: test
+  encrypted_password: <%= User.new.send(:password_digest, '123greetings') %>
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

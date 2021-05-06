@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @post_authors = @posts.map { |p| p.user_id = (User.find_by id: p.user_id).name }
-    puts @post_authors
   end
 
   # GET /posts/1 or /posts/1.json
