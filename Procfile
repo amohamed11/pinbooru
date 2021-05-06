@@ -1,3 +1,2 @@
-web: rails server
+web: bundle exec puma -C config/puma.rb
 sidekiq: sidekiq
-webpack: bin/webpack-dev-server

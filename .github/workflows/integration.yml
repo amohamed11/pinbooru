@@ -1,4 +1,4 @@
-name: test
+name: integration
 
 on:
   push:
@@ -33,6 +33,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
           node-version: 15.x
+    - uses: actions/cache@v2
+      with:
+        path: 'node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
     - name: Bundle install
       run: |
         bundle config path vendor/bundle
@@ -47,6 +51,7 @@ jobs:
       run: |
         yarn install
         bundle exec rails webpacker:compile
+
     - name: Run tests
       env:
           RAILS_ENV: test

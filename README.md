@@ -1,5 +1,7 @@
 # Pinbooru
 
+[![test](https://github.com/amohamed11/pinbooru/actions/workflows/integration.yml/badge.svg)](https://github.com/amohamed11/pinbooru/actions/workflows/integration.yml)  
+
 ## Overview
 
 Yet another image board.  
