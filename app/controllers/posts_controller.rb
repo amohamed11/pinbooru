@@ -65,7 +65,6 @@ class PostsController < ApplicationController
   def delete_image
     @image = ActiveStorage::Attachment.find(params[:id])
     @image.purge
-    redirect_to posts_url
   end
 
 

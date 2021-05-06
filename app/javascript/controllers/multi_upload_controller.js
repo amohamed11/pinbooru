@@ -1,14 +1,9 @@
-// Modified from: https://mentalized.net/journal/2020/11/30/upload-multiple-files-with-rails/
-
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  // filesTarget is going to contain the list of input elements we've added
-  // files to - in other words, these are the input elements that we're going
-  // to submit.
-  static targets = ["files"]
 
   addFile(event) {
+    // Modified from: https://mentalized.net/journal/2020/11/30/upload-multiple-files-with-rails/
     // Create preveiw
     const previewList = document.getElementById("preview")
     const preview = document.getElementById("preview-template").cloneNode(true)
@@ -16,9 +11,6 @@ export default class extends Controller {
 
     // Grab some references for later
     const originalInput = event.target
-    const originalParent = originalInput.parentNode
-
-    this.filesTarget.append(originalInput)
 
     // Read the image file for preview
     var imgFile = originalInput.files[originalInput.files.length - 1]
@@ -39,24 +31,20 @@ export default class extends Controller {
   }
 
   removeFile(event) {
-    // Find related image
+    // Remove the preview that the button belongs to
     const button = event.target
-    const relatedImg = button.previousElementSibling
+    button.parentElement.remove()
 
-    // Remove it from preview list
-    const previewList = document.getElementById("preview")
-    var nodeToRemove = null
-
-    for (let i = 0; i < previewList.childNodes.length; i++) {
-      let p = previewList.childNodes[i];
-      console.log(p)
-      if (p.firstElementChild?.tagName === "IMG" && p.firstElementChild.src === relatedImg.src) {
-        nodeToRemove = p
-        break
+    // Remove file from the input
+    // Source (bless this person's soul): https://stackoverflow.com/a/47642446
+    const input = document.getElementById("post_images")
+    const dt = new DataTransfer()
+    for (let file of input.files) {
+      if (file !== input.files[input.files.length - 1]){
+        dt.items.add(file)
       }
     }
-
-    previewList.removeChild(nodeToRemove)
+    input.files = dt.files
   }
 }
 
