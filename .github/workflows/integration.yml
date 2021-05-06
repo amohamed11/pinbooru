@@ -43,8 +43,10 @@ jobs:
           PGHOST: localhost
           PGUSER: myapp
       run: bin/rails db:setup
-    - name: Webpack compile
-      run: bundle exec rails webpacker:compile
+    - name: Webpack setup
+      run: |
+        yarn install
+        bundle exec rails webpacker:compile
     - name: Run tests
       env:
           RAILS_ENV: test
