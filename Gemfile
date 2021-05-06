@@ -67,3 +67,6 @@ gem 'name_of_person', '~> 1.1', '>= 1.1.1'
 gem 'image_processing'
 # Used to validate mime-type for uploads
 gem 'activestorage-validator'
+group :production do
+  gem "aws-sdk-s3", require: false
+end
