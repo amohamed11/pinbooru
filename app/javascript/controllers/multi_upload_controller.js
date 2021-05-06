@@ -28,16 +28,35 @@ export default class extends Controller {
     };
     reader.readAsDataURL(imgFile)
 
-    console.log(this.filesTarget)
-
     previewImg.style.objectFit = "cover"
     previewImg.style.width = "200px"
     previewImg.style.height = "200px"
 
-    preview.style.display = "block"
-
     // Append preview to preview list
+    preview.style.display = "block"
+    preview.removeAttribute("id")
     previewList.append(preview)
+  }
+
+  removeFile(event) {
+    // Find related image
+    const button = event.target
+    const relatedImg = button.previousElementSibling
+
+    // Remove it from preview list
+    const previewList = document.getElementById("preview")
+    var nodeToRemove = null
+
+    for (let i = 0; i < previewList.childNodes.length; i++) {
+      let p = previewList.childNodes[i];
+      console.log(p)
+      if (p.firstElementChild?.tagName === "IMG" && p.firstElementChild.src === relatedImg.src) {
+        nodeToRemove = p
+        break
+      }
+    }
+
+    previewList.removeChild(nodeToRemove)
   }
 }
 
