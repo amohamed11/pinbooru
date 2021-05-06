@@ -5,7 +5,7 @@
   <h1 class="text-xl font-bold mb-4">Recent Posts</h1>
 </div>
 
-<div class="grid grid-cols-3">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
   <% @posts.each do |post| %>
     <div>
       <p>
@@ -14,7 +14,7 @@
         @<%= @post_authors[post.user_id] %>
       </p>
       <%= link_to post do %>
-        <%= image_tag post.images.first.variant(resize_to_fill: [340, 400]), class: "hover:shadow-2xl hover:scale-110"%>
+        <%= image_tag post.images.first.variant(resize_to_fill: [280, 360], quality: 65), class: "hover:shadow-2xl hover:scale-110"%>
       <% end %>
     </div>
   <% end %>

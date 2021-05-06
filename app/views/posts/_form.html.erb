@@ -22,7 +22,7 @@
         <%= form.label :images, class: "label"%>
         <div id="preview" class="grid grid-cols-6 gaps-2">
           <%= form.object.images.each do |image| %>
-            <%= image_tag image.variant(resize_to_fill: ([200, 200])) %>
+            <%= image_tag image.variant(resize_to_fill: ([200, 200], quality: 50)) %>
           <% end %>
         </div>
         <%= form.file_field :images, multiple: true, :data => { :action => "multi-upload#addFile" } %>

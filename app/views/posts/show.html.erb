@@ -14,9 +14,11 @@
     <br/>
   </p>
 
-  <div class="grid grid-cols-3 gaps-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
     <% @post.images.each do |image| %>
-      <%= image_tag image.variant(resize_to_fill: [400, 400]) %>
+      <%= link_to url_for(image), class: "w-max" do %>
+        <%= image_tag image.variant(resize_to_fill: [360, 420], quality: 85) %>
+      <% end %>
     <% end %>
   </div>
 </div>
