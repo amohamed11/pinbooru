@@ -60,4 +60,5 @@ Lastly for CI, I setup a Github Actions workflow to run tests on every push befo
 
 ## Also an API
 
-Out of interest, I also looked into adding an API to an existing Rails app. Since it turned out to me simple, I create an API for Posts which can be found at `app/controllers/api/v1/posts_controller.rb`. This was mostly out of pure curiosity and to learn more about Rails, so there are not separate tests for this API.
+Out of interest, I also looked into adding an API to an existing Rails app. Since it turned out to be rather simple, I created an API for Posts which can be found at `app/controllers/api/v1/posts_controller.rb`.  
+This was mostly out of pure curiosity and to learn more about Rails, so there are not separate tests for this API.

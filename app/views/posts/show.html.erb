@@ -16,13 +16,12 @@
 
   <div class="grid grid-cols-1 xl:grid-cols-2">
     <% @post.images.each do |image| %>
-      <% if @post.thumbnail(image).processed %>
-        <%= link_to url_for(image), class: "w-max" do %>
-          <%= image_tag @post.thumbnail(image), class: "rounded-lg shadow-xl mb-16 w-64 lg:w-max" %>
-        <% end %>
-      <% else %>
-        <%= render "loading_post" %>
+      <%= link_to url_for(image), class: "w-max hidden load-hidden" do %>
+        <%= image_tag @post.thumbnail(image), class: "rounded-lg shadow-xl mb-16 w-64 lg:w-max" %>
       <% end %>
+      <%= render "loading_post" %>
     <% end %>
   </div>
 </div>
+
+<%= javascript_pack_tag 'image_loader' %>
