@@ -5,7 +5,7 @@ module Api
 
       # Paginated using pagy, with json formatted using jbuilder
       def index
-        @pagy, @posts = pagy(Post.with_attached_images.all)
+        @pagy, @posts = pagy(Post.with_attached_images.all.order("created_at DESC"))
       end
 
       def show
