@@ -7,16 +7,20 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   <% @posts.each do |post| %>
-    <div class="p-8 w-max shadow-md hover:shadow-2xl hover:scale-110 rounded-3xl">
-      <p class="mb-2">
+    <% if post.thumbnail(post.images.first).processed %>
+      <div class="p-8 w-max shadow-md hover:shadow-2xl hover:scale-110 rounded-3xl">
+        <p class="mb-2">
         <strong class="text-lg"><%= post.caption %></strong>
         <br/>
         @<%= @post_authors[post.user_id] %>
-      </p>
-      <%= link_to post do %>
-        <%= image_tag post.thumbnail(post.images.first), class: "w-80 rounded-2xl"%>
-      <% end %>
-    </div>
+        </p>
+        <%= link_to post do %>
+          <%= image_tag post.thumbnail(post.images.first), class: "w-80 rounded-2xl"%>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render "loading_post" %>
+    <% end %>
   <% end %>
 </div>
 
