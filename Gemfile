@@ -70,3 +70,4 @@ gem 'activestorage-validator'
 group :production do
   gem "aws-sdk-s3", require: false
 end
+gem 'pagy', '~> 3.5' # omit patch digit and use the latest if possible

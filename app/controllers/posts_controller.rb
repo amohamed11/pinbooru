@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:show, :index]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.with_attached_images.all
+    @pagy, @posts = pagy(Post.with_attached_images.all, items: 6)
     @post_authors = @posts.map { |p| p.user_id = (User.find_by id: p.user_id).name }
   end
 
