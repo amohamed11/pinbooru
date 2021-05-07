@@ -5,6 +5,8 @@ class Post < ApplicationRecord
 
   validates :images, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
 
+  before_destroy :purge_images, prepend: true
+
   def thumbnail(image)
     variant = image.variant(resize_to_fill: [620, 680], quality: 75)
     return variant
@@ -13,6 +15,12 @@ class Post < ApplicationRecord
   def tiny_preview(image)
     variant = image.variant(resize_to_fill: [200, 200], quality: 50)
     return variant
+  end
+
+  private
+
+  def purge_images
+    images.purge_later
   end
 
  end
