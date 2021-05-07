@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.with_attached_images.all
     @post_authors = @posts.map { |p| p.user_id = (User.find_by id: p.user_id).name }
   end
 
@@ -29,6 +29,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        VariantsGeneratorJob.perform_later @post.id
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -42,6 +43,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params) and @post.user_id == current_user.id
+        VariantsGeneratorJob.perform_later @post.id
         format.html { redirect_to @post, notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else

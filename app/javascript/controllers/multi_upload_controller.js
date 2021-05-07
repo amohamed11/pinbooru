@@ -8,7 +8,9 @@ export default class extends Controller {
 
   // Modified from: https://mentalized.net/journal/2020/11/30/upload-multiple-files-with-rails/
   addFile(event) {
-    const previewList = document.getElementById("preview")
+    const oldPreviewList = document.getElementById("preview")
+    const previewList = oldPreviewList.cloneNode(false)
+    oldPreviewList.parentNode.replaceChild(previewList, oldPreviewList)
 
     // Grab some references for later
     const originalInput = event.target

@@ -14,10 +14,10 @@
     <br/>
   </p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+  <div class="grid grid-cols-2">
     <% @post.images.each do |image| %>
       <%= link_to url_for(image), class: "w-max" do %>
-        <%= image_tag image.variant(resize_to_fill: [360, 420], quality: 85), class: "rounded-lg" %>
+        <%= image_tag @post.thumbnail(image), class: "rounded-lg shadow-xl mb-16" %>
       <% end %>
     <% end %>
   </div>

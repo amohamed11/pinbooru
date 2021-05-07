@@ -23,7 +23,7 @@
         <div id="preview" class="grid grid-cols-3 gap-2 lg:grid-cols-6 lg:gap-2">
           <% form.object.images.each do |image| %>
             <div class="w-max relative">
-              <%= image_tag image.variant(resize_to_fill: [200, 200], quality: 50), class: "rounded-2xl" %>
+              <%= image_tag @post.tiny_preview(image), class: "rounded-2xl" %>
               <%= link_to "❌", delete_image_post_url(image.id), 
                 class: "btn btn-sm btn-transparent absolute top-1 right-0",
                 method: :delete,
@@ -38,6 +38,7 @@
         </div>
         <%= form.file_field :images, class: "w-min input mt-4",
           multiple: true,
+          direct_upload: true,
           accept: "image/png,image/jpeg",
           :data => { :action => "multi-upload#addFile" }
         %>

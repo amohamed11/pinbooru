@@ -2,19 +2,19 @@
 
 <div class="page-header">
   <%= link_to 'New', new_post_path, class: "float-right btn btn-green" %>
-  <h1 class="text-xl font-bold mb-4">Recent Posts</h1>
+  <h2 class="text-2xl font-bold mb-4">Recent Posts</h2>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   <% @posts.each do |post| %>
-    <div>
-      <p>
-        <strong><%= post.caption %></strong>
+    <div class="p-8 w-max shadow-md hover:shadow-2xl hover:scale-110 rounded-3xl">
+      <p class="mb-2">
+        <strong class="text-lg"><%= post.caption %></strong>
         <br/>
         @<%= @post_authors[post.user_id] %>
       </p>
       <%= link_to post do %>
-        <%= image_tag post.images.first.variant(resize_to_fill: [280, 360], quality: 65), class: "hover:shadow-2xl hover:scale-110 rounded-xl"%>
+        <%= image_tag post.thumbnail(post.images.first), class: "w-80 rounded-2xl"%>
       <% end %>
     </div>
   <% end %>
