@@ -8,6 +8,8 @@ Pinbooru is a dead-simple image board, which allows for users to create posts wi
 This is my submission for Shopify 2021 fall internship (backend) challenge.  
 I utilized this Rails+Tailwindcss [template](https://github.com/justalever/kickoff_tailwind) by Andy Leverenz.  
 
+![](https://raw.githubusercontent.com/amohamed11/pinbooru/main/pinbooru_demo.gif)
+
 ## Running it locally
 
 ### Requirments
