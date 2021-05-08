@@ -5,7 +5,7 @@
   <h2 class="text-2xl font-bold mb-4">Recent Posts</h2>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
   <% @posts.each_with_index do |post, index| %>
     <div class="p-8 w-max shadow-md hover:shadow-2xl hover:scale-110 rounded-3xl hidden load-hidden">
       <p class="mb-2">
@@ -21,7 +21,7 @@
   <% end %>
 </div>
 
-<div class="mt-12 mr-8 text-center">
+<div class="my-12 mr-8 text-center">
   <%== pagy_nav(@pagy) %>
 </div>
 
