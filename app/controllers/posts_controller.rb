@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @pagy, @posts = pagy(Post.with_attached_images.all.order("created_at DESC"))
-    @post_authors = @posts.map { |p| p.user_id = (User.find_by id: p.user_id).name }
+    @post_authors = @posts.map { |p| User.find(p.user_id).name }
   end
 
   # GET /posts/1 or /posts/1.json

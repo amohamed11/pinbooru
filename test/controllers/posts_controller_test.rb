@@ -38,6 +38,15 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to post_url(Post.last)
   end
 
+  test "should fail to create post" do
+    assert_no_difference('Post.count') do
+      post posts_url, params: { post: { caption: "a post with no images" } }
+    end
+
+    # 422: Unprocessable entity, indicating the post has incorrect parameters
+    assert_response 422
+  end
+
   test "should show post" do
     get post_url(@singleImagePost)
     assert_response :success
@@ -46,6 +55,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get edit" do
     get edit_post_url(@singleImagePost)
     assert_response :success
+  end
+
+  test "should fail to get edit when not the author" do
+    sign_out users(:one)
+
+    get edit_post_url(@singleImagePost)
+
+    # Redirect to login
+    assert_response :redirect
+    assert_redirected_to user_session_url
   end
 
   test "should update post with a different image" do
@@ -62,6 +81,18 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @singleImagePost.caption, "updated caption"
     assert_equal @singleImagePost.images.count, 1
     assert_equal @singleImagePost.images[0].filename(), "one.jpg"
+  end
+
+  test "should fail to update post as not the author" do
+    sign_out users(:one)
+
+    assert_no_changes :@singleImagePost do
+      patch post_url(@singleImagePost), params: { post: { caption: "updated caption" } }
+    end
+
+    # Redirect to login
+    assert_response :redirect
+    assert_redirected_to user_session_url
   end
 
   test "should update post by adding an image" do
@@ -84,5 +115,17 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to posts_url
+  end
+
+  test "should fail to destroy post as not the author" do
+    sign_out users(:one)
+
+    assert_no_difference('Post.count') do
+      delete post_url(@singleImagePost)
+    end
+
+    # Redirect to login
+    assert_response :redirect
+    assert_redirected_to user_session_url
   end
 end

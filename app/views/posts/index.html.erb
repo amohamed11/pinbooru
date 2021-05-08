@@ -6,15 +6,15 @@
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <% @posts.each do |post| %>
+  <% @posts.each_with_index do |post, index| %>
     <div class="p-8 w-max shadow-md hover:shadow-2xl hover:scale-110 rounded-3xl hidden load-hidden">
       <p class="mb-2">
         <strong class="text-lg"><%= post.caption %></strong>
         <br/>
-        @<%= @post_authors[post.user_id] %>
+        @<%= @post_authors[index] %>
       </p>
       <%= link_to post do %>
-        <%= image_tag post.thumbnail(post.images.first), class: "w-80 rounded-2xl"%>
+        <%= image_tag post.thumbnail(post.images.first), class: "w-64 rounded-2xl"%>
       <% end %>
     </div>
     <%= render "loading_post" %>

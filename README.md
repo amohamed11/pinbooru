@@ -54,11 +54,14 @@ A signed-in user can above alongside:
 ## Testing
 
 For testing, I settled with Rails' built-in testing `minitest` as it satisfies all of Pinbooru's simple needs.  
-To test with actual images, there are a couple of fixture images, these can be found at `test/fixtures/files/`.  
-All of the tests for the Posts can be found in `test/controllers/posts_controller_test.rb`.  
+To test with actual images, there are a couple of fixture images, which can be found at `test/fixtures/files/`.  
+All of the tests for Posts can be found in `test/controllers/posts_controller_test.rb`.  
+Pinbooru was development in TDD manner. As such most tests were created early on, with changes done depending on controller updates.  
+There are a total of 13 tests with 29 assertions. Main focus of testing was the basic flow of app & the permissions for each endpoint.  
 Lastly for CI, I setup a Github Actions workflow to run tests on every push before deployment (auto-deployment is setup through Heroku).
 
 ## Also an API
 
 Out of interest, I also looked into adding an API to an existing Rails app. Since it turned out to be rather simple, I created an API for Posts which can be found at `app/controllers/api/v1/posts_controller.rb`.  
+The API url path is `/api/v1/posts`.  
 This was mostly out of pure curiosity and to learn more about Rails, so there are not separate tests for this API.
