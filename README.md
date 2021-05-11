@@ -45,7 +45,8 @@ Pinbooru utilizes Devise for handling authentication.
 Currently a non-signed-in user can:  
 - View index page with all the Posts  
 - View individual Posts  
-A signed-in user can above alongside:  
+
+A signed-in user can, alongside the above, do:  
 - Creating a new Post with 1 or more images.  
 - Edit their own Posts by  
   - Updating the caption  
@@ -60,7 +61,8 @@ To test with actual images, there are a couple of fixture images, which can be f
 All of the tests for Posts can be found in `test/controllers/posts_controller_test.rb`.  
 Pinbooru was development in TDD manner. As such most tests were created early on, with changes done depending on controller updates.  
 There are a total of 13 tests with 29 assertions. Main focus of testing was the basic flow of app & the permissions for each endpoint.  
-Lastly for CI, I setup a Github Actions workflow to run tests on every push before deployment (auto-deployment is setup through Heroku).
+Lastly for CI, I setup a Github Actions workflow to run tests on every push before deployment (auto-deployment is setup through Heroku).  
+<img src="https://i.postimg.cc/3rVdhLKX/Screenshot-2021-05-11-Build-software-better-together.png" width="400px" />
 
 ## Also an API
 
